@@ -1,9 +1,11 @@
 package com.example.shopforhome.config;
 
-import com.example.shopforhome.Repository.CartItemRepository;
-import com.example.shopforhome.Repository.ProductRepository;
-import com.example.shopforhome.Repository.UserRepository;
+import com.example.shopforhome.repository.CartItemRepository;
+import com.example.shopforhome.repository.CartRepository;
+import com.example.shopforhome.repository.ProductRepository;
+import com.example.shopforhome.repository.UserRepository;
 import com.example.shopforhome.entity.CartItem;
+import com.example.shopforhome.entity.Cart;
 import com.example.shopforhome.entity.Product;
 import com.example.shopforhome.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,8 @@ public class DataInitializer implements CommandLineRunner {
     private ProductRepository productRepository;
     @Autowired
     private CartItemRepository cartItemRepository;
-
+    @Autowired
+    private CartRepository cartRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -52,16 +55,23 @@ public class DataInitializer implements CommandLineRunner {
         product2.setStock(100);
         productRepository.save(product2);
 
+        Cart cart = new Cart();
+        cart.setUser(user1);
+        cart.setTotalPrice(0.0);
+        cart = cartRepository.save(cart);
+
         CartItem cartItem1 = new CartItem();
-        cartItem1.setUser(user1);
+        cartItem1.setCart(cart);
         cartItem1.setProduct(product1);
         cartItem1.setQuantity(1);
+        cartItem1.setPrice(product1.getPrice());
         cartItemRepository.save(cartItem1);
 
         CartItem cartItem2 = new CartItem();
-        cartItem2.setUser(user1);
+        cartItem2.setCart(cart);
         cartItem2.setProduct(product2);
         cartItem2.setQuantity(2);
+        cartItem2.setPrice(product2.getPrice());
         cartItemRepository.save(cartItem2);
     }
 }

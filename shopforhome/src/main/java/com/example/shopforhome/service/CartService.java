@@ -33,9 +33,8 @@ public class CartService {
             return null;
         }
 
-        Cart cart = cartRepository.findByUserId(userId).orElse(null);
-        if (cart == null) {
-            cart = new Cart();
+        Cart cart = cartRepository.findByUserId(userId).orElse(new Cart());
+        if (cart.getId() == null) {
             cart.setUser(user);
             cart.setTotalPrice(0.0);
             cart = cartRepository.save(cart);
@@ -43,6 +42,7 @@ public class CartService {
 
         return mapToDTO(cart);
     }
+
 
     public CartDTO addItem(Long userId, Long productId, int quantity) {
         Cart cart = cartRepository.findByUserId(userId).orElse(null);
@@ -67,13 +67,14 @@ public class CartService {
         }
 
         cartItem.setQuantity(cartItem.getQuantity() + quantity);
-        cartItem.setPrice(product.getPrice().doubleValue());
+        cartItem.setPrice(product.getPrice());  // Corrected line
 
-        cart.setTotalPrice(cart.getTotalPrice() + product.getPrice().doubleValue() * quantity);
+        cart.setTotalPrice(cart.getTotalPrice() + product.getPrice() * quantity);
         cart = cartRepository.save(cart);
 
         return mapToDTO(cart);
     }
+
 
     public CartDTO removeItem(Long userId, Long productId) {
         Cart cart = cartRepository.findByUserId(userId).orElse(null);
@@ -96,6 +97,7 @@ public class CartService {
 
         return mapToDTO(cart);
     }
+
 
     public CartDTO updateQuantity(Long userId, Long productId, int quantity) {
         Cart cart = cartRepository.findByUserId(userId).orElse(null);
@@ -130,6 +132,7 @@ public class CartService {
                 .mapToDouble(item -> item.getPrice() * item.getQuantity())
                 .sum();
     }
+
 
     public void clearCart(Long userId) {
         Cart cart = cartRepository.findByUserId(userId).orElse(null);

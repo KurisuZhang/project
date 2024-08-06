@@ -1,6 +1,5 @@
 package com.example.shopforhome.controller;
 
-import com.example.shopforhome.Repository.UserRepository;
 import com.example.shopforhome.dto.LoginRequestDTO;
 import com.example.shopforhome.dto.RegisterUserDTO;
 import com.example.shopforhome.service.UserService;
