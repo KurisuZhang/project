@@ -29,13 +29,13 @@ public class DataInitializer implements CommandLineRunner {
         User user1 = new User();
         user1.setUsername("user1");
         user1.setPassword(encoder.encode("password1"));
-        user1.setRole("USER");
+        user1.setRole("ROLE_USER");
         userRepository.save(user1);
 
         User admin = new User();
         admin.setUsername("admin");
         admin.setPassword(encoder.encode("adminpass"));
-        admin.setRole("ADMIN");
+        admin.setRole("ROLE_ADMIN");
         userRepository.save(admin);
 
         Product product1 = new Product();

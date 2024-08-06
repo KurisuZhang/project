@@ -1,9 +1,6 @@
 package com.example.shopforhome.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,4 +17,8 @@ public class Product {
     private String category;
     private double price;
     private int stock;
+
+    @ManyToOne
+    @JoinColumn(name = "users")
+    private User user;
 }
