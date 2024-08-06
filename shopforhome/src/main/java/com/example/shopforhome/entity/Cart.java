@@ -9,18 +9,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class CartItem {
+public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private Cart cart;
+    @OneToOne
+    private User user;
 
-    @ManyToOne
-    private Product product;
+    @OneToMany
+    private List<CartItem> items = new ArrayList<>();
 
-    private int quantity;
-
-    private double price;
+    private double totalPrice;
 }
