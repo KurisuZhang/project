@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,8 +20,11 @@ public class Product {
     private String category;
     private double price;
     private int stock;
+    private String imageUrl;
 
-    @ManyToOne
-    @JoinColumn(name = "users")
-    private User user;
+//    @ManyToMany(mappedBy = "cart")
+//    private Set<Cart> carts;
+
+//    @ManyToMany(mappedBy = "wishlist")
+//    private Set<Wishlist> usersInWishlist;
 }

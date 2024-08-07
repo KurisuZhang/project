@@ -43,6 +43,7 @@ public class DataInitializer implements CommandLineRunner {
         product1.setCategory("Electronics");
         product1.setPrice(1000.0);
         product1.setStock(50);
+        product1.setImageUrl("https://m.media-amazon.com/images/I/71p-M3sPhhL.jpg");
         productRepository.save(product1);
 
         Product product2 = new Product();
@@ -50,6 +51,7 @@ public class DataInitializer implements CommandLineRunner {
         product2.setCategory("Electronics");
         product2.setPrice(700.0);
         product2.setStock(100);
+        product2.setImageUrl("https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-card-40-iphone15hero-202309_FMT_WHH?wid=508&hei=472&fmt=p-jpg&qlt=95&.v=1693086369781");
         productRepository.save(product2);
 
         CartItem cartItem1 = new CartItem();
