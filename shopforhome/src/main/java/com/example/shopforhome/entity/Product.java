@@ -1,10 +1,10 @@
 package com.example.shopforhome.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 import java.util.List;
 
@@ -16,15 +16,20 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private String category;
     private double price;
     private int stock;
     private String imageUrl;
 
-//    @ManyToMany(mappedBy = "cart")
-//    private Set<Cart> carts;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<CartItem> cartItems;
 
-//    @ManyToMany(mappedBy = "wishlist")
-//    private Set<Wishlist> usersInWishlist;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<WishListItem> wishListItems;
+
 }
+

@@ -1,5 +1,6 @@
 package com.example.shopforhome.service;
 
+import com.example.shopforhome.dto.ProductPutByIdDTO;
 import com.example.shopforhome.repository.ProductRepository;
 import com.example.shopforhome.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,17 +28,23 @@ public class ProductService {
         return productRepository.findByCategory(category);
     }
 
-    public Product addProduct(Product product) {
+    public Product addProduct(ProductPutByIdDTO ProductPutByIdDTO) {
+        Product product = new Product();
+        product.setName(ProductPutByIdDTO.getName());
+        product.setPrice(ProductPutByIdDTO.getPrice());
+        product.setCategory(ProductPutByIdDTO.getCategory());
+        product.setStock(ProductPutByIdDTO.getStock());
+        product.setImageUrl(ProductPutByIdDTO.getImageUrl());
         return productRepository.save(product);
     }
 
-    public Optional<Product> updateProduct(Long id, Product productDetails) {
+    public Optional<Product> updateProduct(Long id, ProductPutByIdDTO productPutByIdDTO) {
         return productRepository.findById(id).map(product -> {
-            product.setName(productDetails.getName());
-            product.setCategory(productDetails.getCategory());
-            product.setPrice(productDetails.getPrice());
-            product.setStock(productDetails.getStock());
-            product.setImageUrl(productDetails.getImageUrl());
+            product.setName(productPutByIdDTO.getName());
+            product.setCategory(productPutByIdDTO.getCategory());
+            product.setPrice(productPutByIdDTO.getPrice());
+            product.setStock(productPutByIdDTO.getStock());
+            product.setImageUrl(productPutByIdDTO.getImageUrl());
             return productRepository.save(product);
         });
     }

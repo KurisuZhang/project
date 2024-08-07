@@ -1,10 +1,9 @@
 package com.example.shopforhome.controller;
 
+import com.example.shopforhome.dto.ProductPutByIdDTO;
 import com.example.shopforhome.entity.Product;
 import com.example.shopforhome.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -19,12 +18,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/hello")
-    public String hello() {
-        return "this is ProductController";
-    }
-
-    @GetMapping()
+    @GetMapping("/all")
     public List<Product> getAllProducts() {
         return productService.getAllProducts();
     }
@@ -56,9 +50,9 @@ public class ProductController {
         return productService.getProductsByCategory(category);
     }
 
-    @PostMapping
-    public Map<String, String> addProduct(@RequestBody Product product) {
-        Product savedProduct = productService.addProduct(product);
+    @PostMapping("/add")
+    public Map<String, String> addProduct(@RequestBody ProductPutByIdDTO ProductPutByIdDTO) {
+        Product savedProduct = productService.addProduct(ProductPutByIdDTO);
         Map<String, String> response = new HashMap<>();
         response.put("status", "success");
         response.put("message", "Product added successfully");
@@ -67,9 +61,9 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public Map<String, String> updateProduct(@PathVariable Long id, @RequestBody Product productDetails) {
+    public Map<String, String> updateProduct(@PathVariable Long id, @RequestBody ProductPutByIdDTO productPutByIdDTO) {
         Map<String, String> response = new HashMap<>();
-        Optional<Product> updatedProduct = productService.updateProduct(id, productDetails);
+        Optional<Product> updatedProduct = productService.updateProduct(id, productPutByIdDTO);
 
         if (updatedProduct.isPresent()) {
             response.put("status", "success");
