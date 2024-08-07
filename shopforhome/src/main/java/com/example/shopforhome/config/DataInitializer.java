@@ -10,7 +10,6 @@ import com.example.shopforhome.repository.ProductRepository;
 import com.example.shopforhome.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -30,23 +29,22 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         User user1 = new User();
         user1.setUsername("user1");
-        user1.setPassword(encoder.encode("123"));
+        user1.setPassword("123");
         user1.setRole("ROLE_USER");
         userRepository.save(user1);
 
         User admin = new User();
         admin.setUsername("admin");
-        admin.setPassword(encoder.encode("123"));
+        admin.setPassword("123");
         admin.setRole("ROLE_ADMIN");
         userRepository.save(admin);
 
         User user2 = new User();
         user2.setUsername("user2");
-        user2.setPassword(encoder.encode("123"));
+        user2.setPassword("123");
         user2.setRole("ROLE_VIP");
         userRepository.save(user2);
 
