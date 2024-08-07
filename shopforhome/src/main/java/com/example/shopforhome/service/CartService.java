@@ -1,6 +1,6 @@
 package com.example.shopforhome.service;
 
-import com.example.shopforhome.Repository.CartItemRepository;
+import com.example.shopforhome.repository.CartItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

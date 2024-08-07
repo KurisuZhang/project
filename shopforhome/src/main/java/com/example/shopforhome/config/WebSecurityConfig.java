@@ -1,6 +1,6 @@
 package com.example.shopforhome.config;
 
-import com.example.shopforhome.Repository.UserRepository;
+import com.example.shopforhome.repository.UserRepository;
 import com.example.shopforhome.config.jwt.JwtAuthenticationFilter;
 import com.example.shopforhome.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;

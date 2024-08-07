@@ -1,8 +1,8 @@
 package com.example.shopforhome.config;
 
-import com.example.shopforhome.Repository.CartItemRepository;
-import com.example.shopforhome.Repository.ProductRepository;
-import com.example.shopforhome.Repository.UserRepository;
+import com.example.shopforhome.repository.CartItemRepository;
+import com.example.shopforhome.repository.ProductRepository;
+import com.example.shopforhome.repository.UserRepository;
 import com.example.shopforhome.entity.CartItem;
 import com.example.shopforhome.entity.Product;
 import com.example.shopforhome.entity.User;
