@@ -31,4 +31,24 @@ public class CartController {
         double totalPrice = cartService.calculateTotalPrice(userId);
         return ResponseEntity.ok(totalPrice);
     }
+
+    @PutMapping("/{userId}/quantity/{productId}")
+    public ResponseEntity<Cart> updateQuantity(@PathVariable Long userId, @PathVariable Long productId, @RequestParam int quantityChange) {
+        Cart updatedCart = cartService.updateQuantity(userId, productId, quantityChange);
+        if (updatedCart != null) {
+            return ResponseEntity.ok(updatedCart);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{userId}/clear")
+    public ResponseEntity<Cart> clearCart(@PathVariable Long userId) {
+        Cart clearedCart = cartService.clearCart(userId);
+        if (clearedCart != null) {
+            return ResponseEntity.ok(clearedCart);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
