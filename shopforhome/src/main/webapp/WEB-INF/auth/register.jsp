@@ -50,7 +50,7 @@
     </style>
 </head>
 
-<%@ include file="../nav.jsp" %>
+<%@ include file="../component/nav.jsp" %>
 
 <body>
 <div class="register-card bg-light">

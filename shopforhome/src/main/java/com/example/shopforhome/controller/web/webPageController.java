@@ -31,7 +31,14 @@ public class webPageController {
         List<Product> products = productController.getAllProducts();
         model.addAttribute("products", products);
 
-        return "home";
+        return "/pages/home";
+    }
+
+    @GetMapping("/cart")
+    public String cart(Model model) {
+        List<Product> products = productController.getAllProducts();
+        model.addAttribute("products", products);
+        return "./pages/cart";
     }
 
 

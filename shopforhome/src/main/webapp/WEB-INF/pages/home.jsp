@@ -1,10 +1,10 @@
-<%@ page import="com.example.shopforhome.entity.Product" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product List</title>
+    <title>Home</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Font Awesome for icons -->
@@ -78,10 +78,10 @@
 </head>
 <body>
 
-    <%@ include file="nav.jsp" %>
-    <%@ include file="banner.jsp" %>
-    <%@ include file="CardViewList.jsp" %>
-    <%@ include file="footer.jsp" %>
+    <%@ include file="../component/nav.jsp" %>
+    <%@ include file="../component/banner.jsp" %>
+    <%@ include file="../component/CardViewList.jsp" %>
+    <%@ include file="../component/footer.jsp" %>
 
 
     <!-- Bootstrap JS and dependencies -->
