@@ -5,6 +5,7 @@ import com.example.shopforhome.dto.RegisterUserDTO;
 import com.example.shopforhome.entity.User;
 import com.example.shopforhome.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -21,39 +22,19 @@ public class UserController {
 
     // post login
     @PostMapping("/login")
-    public Map<String, String> login(@RequestBody LoginRequestDTO loginRequestDTO) {
-
-        HashMap<String, String> returnMap = new HashMap<>();
+    public ResponseEntity<String> login(@RequestBody LoginRequestDTO loginRequestDTO) {
 
         Optional<User> optionalUser = userService.findByUsername(loginRequestDTO.getUsername());
-        if (optionalUser.isPresent()){
+        if (optionalUser.isPresent()) {
             User user = optionalUser.get();
-            if (loginRequestDTO.getPassword().equals(user.getPassword())){
-                returnMap.put("Statue", "Login Success");
+            if (loginRequestDTO.getPassword().equals(user.getPassword())) {
+                return ResponseEntity.ok(user.getUsername()+"`"+user.getRole());
             } else {
-                returnMap.put("Statue", "Password is Wrong");
+                return ResponseEntity.status(401).body("Statue\", \"Password is Wrong\""); // Unauthorized
             }
         } else {
-            returnMap.put("statue", "User does not exist");
+            return ResponseEntity.status(404).body("Statue\", \"User does not exist"); // Not Found
         }
-        return returnMap;
-
-//        try {
-//            Authentication authentication = authenticationManager.authenticate(
-//                    new UsernamePasswordAuthenticationToken(loginRequestDTO.getUsername(), loginRequestDTO.getPassword())
-//            );
-//
-//            Optional<User> user = userService.findByUsername(loginRequestDTO.getUsername());
-//            String role = user.get().getRole();
-//            HashMap<String, Object> returnMap = new HashMap<>();
-//            returnMap.put("Login", "Success");
-//            returnMap.put("jwt", jwtUtil.generateToken(loginRequestDTO.getUsername(), role));
-//            return returnMap;
-//        } catch (AuthenticationException e) {
-//            throw new RuntimeException("Invalid credentials");
-//        }
-
-
     }
 
     // post register
@@ -72,14 +53,6 @@ public class UserController {
         hashMap.put("userName",user.getUsername());
         hashMap.put("role", user.getRole());
         return hashMap;
-//        User user = new User();
-//        user.setUsername(registerUserDTO.getUsername());
-//        user.setPassword(passwordEncoder.encode(registerUserDTO.getPassword()));
-//        user.setRole(registerUserDTO.getRole());
-//        userService.save(user);
-//        Map<String, String> response = new HashMap<>();
-//        response.put("status", "success register");
-//        return response;
     }
 
     // post logout
