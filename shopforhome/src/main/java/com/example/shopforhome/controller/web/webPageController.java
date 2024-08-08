@@ -1,8 +1,12 @@
 package com.example.shopforhome.controller.web;
 
+import com.example.shopforhome.controller.ProductController;
+import com.example.shopforhome.entity.Product;
 import com.example.shopforhome.entity.User;
-import com.example.shopforhome.entity.Userr;
+//import com.example.shopforhome.entity.User;
 import jakarta.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,15 +19,18 @@ import java.util.Map;
 @Controller
 public class webPageController {
 
+    @Autowired
+    private ProductController productController;
+
     @GetMapping("/login")
     public String getLogin(HttpSession session, Model model) {
-        // Get email and password from session and add to the model
-        String email = (String) session.getAttribute("email");
+        // Get username and password from session and add to the model
+        String username = (String) session.getAttribute("username");
         String password = (String) session.getAttribute("password");
         String role = (String) session.getAttribute("role");
 
-        if (email != null) {
-            model.addAttribute("email", email);
+        if (username != null) {
+            model.addAttribute("username", username);
             model.addAttribute("password", password);
             session.removeAttribute("password");
         }
@@ -37,7 +44,7 @@ public class webPageController {
 
     @GetMapping("/welcome")
     public String getWelcome(HttpSession session, Model model) {
-        Userr user = (Userr) session.getAttribute("user");
+        User user = (User) session.getAttribute("user");
 
         if (user != null) {
             model.addAttribute("user", user);
@@ -46,6 +53,13 @@ public class webPageController {
 //        List<Map<String, Object>> products = restTemplate.getForObject("https://fakestoreapi.com/products", List.class);
 //        model.addAttribute("products", products);
         return "welcome";
+    }
+
+    @GetMapping("/")
+    public String home(Model model) {
+        List<Product> products = productController.getAllProducts();
+        model.addAttribute("products", products);
+        return "home";  
     }
 }
 
