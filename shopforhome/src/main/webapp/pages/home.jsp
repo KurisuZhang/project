@@ -1,10 +1,10 @@
-<%@ page import="com.example.shopforhome.entity.Product" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product List</title>
+    <title>Home</title>
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -62,7 +62,6 @@
         .product-card-footer {
             text-align: center;
         }
-       
         .footer {
             background-color: #343a40;
             color: #fff;
@@ -78,12 +77,10 @@
     </style>
 </head>
 <body>
-
-    <%@ include file="nav.jsp" %>
-    <%@ include file="banner.jsp" %>
-    <%@ include file="CardViewList.jsp" %>
-    <%@ include file="footer.jsp" %>
-
+    <%@ include file="../WEB-INF/nav.jsp" %>
+    <%@ include file="../WEB-INF/banner.jsp" %>
+    <%@ include file="../WEB-INF/CardViewList.jsp" %>
+    <%@ include file="../WEB-INF/footer.jsp" %>
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -92,3 +89,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
+

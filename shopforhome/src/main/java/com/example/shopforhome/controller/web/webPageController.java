@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
-
 @Controller
 public class webPageController {
 
@@ -23,7 +22,10 @@ public class webPageController {
         return "home";
     }
 
-
+    @GetMapping("/cart")
+    public String cart(Model model) {
+        List<Product> products = productController.getAllProducts();
+        model.addAttribute("products", products);
+        return "cart";
+    }
 }
-
-

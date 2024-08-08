@@ -20,10 +20,8 @@
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success me-2" type="submit">Search</button>
             </form>
-            <div class="text-end">
-                <button type="button" class="btn btn-outline-dark text-dark me-2">Login</button>
-                <button type="button" class="btn btn-warning">Sign-up</button>
-            </div>
+            <%-- Include userStatus.jsp here --%>
+            <jsp:include page="/WEB-INF/userStatus.jsp" />
         </div>
     </div>
 </nav>
