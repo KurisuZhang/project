@@ -31,5 +31,17 @@ public class Product {
     @JsonIgnore
     private List<WishListItem> wishListItems;
 
+    @Override
+    public String toString() {
+        return "Product{" +
+               "id=" + id +
+               ", name='" + name + '\'' +
+               ", category='" + category + '\'' +
+               ", price=" + price +
+               ", stock=" + stock +
+               ", imageUrl='" + imageUrl + '\'' +
+               '}';
+    }
+
 }
 

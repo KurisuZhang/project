@@ -1,0 +1,72 @@
+html,body {
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+}
+.content {
+    flex: 1;
+}
+
+.fancy-brand {
+    font-family: 'Brush Script MT', cursive;
+    font-size: 2rem;
+    font-weight: bold;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+.product-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.product-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+.product-card img {
+    border-bottom: 1px solid #e0e0e0;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    object-fit: cover;
+    height: 200px; /* Adjust height as needed */
+}
+.product-card-body {
+    padding: 1.25rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+.product-card-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+.product-card-text {
+    color: #777;
+}
+.product-card-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
+.product-card-footer {
+    text-align: center;
+}
+
+.footer {
+    background-color: #343a40;
+    color: #fff;
+    padding: 1rem 0;
+}
+.footer a {
+    color: #fff;
+    text-decoration: none;
+}
+.footer a:hover {
+    text-decoration: underline;
+}

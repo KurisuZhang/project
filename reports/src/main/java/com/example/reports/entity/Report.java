@@ -6,7 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 @Data
 @NoArgsConstructor
@@ -18,5 +19,5 @@ public class Report {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String reportMessage;
-    private Date generatedDate;
+    private LocalDate generatedDate;
 }
