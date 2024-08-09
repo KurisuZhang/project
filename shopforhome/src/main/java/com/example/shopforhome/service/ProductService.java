@@ -59,7 +59,7 @@ public class ProductService {
     }
 
     public List<Product> searchProducts(String name) {
-        return productRepository.findByNameContaining(name);
+        return productRepository.findByNameContainingIgnoreCase(name);
     }
 
     public List<Product> sortProductsByPrice(boolean ascending) {

@@ -5,7 +5,6 @@ html,body {
 .content {
     flex: 1;
 }
-
 .fancy-brand {
     font-family: 'Brush Script MT', cursive;
     font-size: 2rem;
@@ -13,6 +12,9 @@ html,body {
     background: linear-gradient(to right, #ff7e5f, #feb47b);
     -webkit-background-clip: text;
     color: transparent;
+}
+.navbar-custom{
+    height:30px;
 }
 .product-card {
     border: 1px solid #e0e0e0;

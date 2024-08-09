@@ -49,36 +49,68 @@ public class DataInitializer implements CommandLineRunner {
         userRepository.save(user2);
 
         Product product1 = new Product();
-        product1.setName("ring");
-        product1.setCategory("jewelery");
+        product1.setName("Blue Pillow");
+        product1.setCategory("pillow");
         product1.setPrice(10.99);
         product1.setStock(50);
-        product1.setImageUrl("https://fakestoreapi.com/img/51UDEzMJVpL._AC_UL640_QL65_ML3_.jpg");
+        product1.setImageUrl("https://m.media-amazon.com/images/G/01/DiscoTec/2024/HomeLifestyle/HomeSummerFlip/Browse/Home_Flip_Summer_2024_1_Onsite_Bedding_NewNow_D_333x509._CB557801672_.jpg");
         productRepository.save(product1);
 
         Product product2 = new Product();
-        product2.setName("hard disk");
-        product2.setCategory("electronics");
+        product2.setName("Hillsby Oriental Indoor Rug");
+        product2.setCategory("rug");
         product2.setPrice(64.0);
         product2.setStock(100);
-        product2.setImageUrl("https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg");
+        product2.setImageUrl("https://assets.wfcdn.com/im/21228098/resize-h416-w416%5Ecompr-r85/1714/171459248/Hillsby+Oriental+Indoor+Rug.jpg");
         productRepository.save(product2);
 
         Product product3 = new Product();
-        product3.setName("display");
-        product3.setCategory("electronics");
+        product3.setName("Albion Oriental Indoor Rug");
+        product3.setCategory("rug");
         product3.setPrice(599.0);
         product3.setStock(100);
-        product3.setImageUrl("https://fakestoreapi.com/img/81QpkIctqPL._AC_SX679_.jpg");
+        product3.setImageUrl("https://assets.wfcdn.com/im/97188764/resize-h416-w416%5Ecompr-r85/2212/221290429/Albion+Oriental+Indoor+Rug.jpg");
         productRepository.save(product3);
 
         Product product4 = new Product();
-        product4.setName("Mens Casual");
-        product4.setCategory("men's clothing");
-        product4.setPrice(22.0);
+        product4.setName("Saur Bathroom Vanity");
+        product4.setCategory("bathroom");
+        product4.setPrice(1480.0);
         product4.setStock(100);
-        product4.setImageUrl("https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg");
+        product4.setImageUrl("https://assets.wfcdn.com/im/94870443/c_crop_resize_zoom-h624-w900%5Ecompr-r85/2271/227100581/default_name.jpg");
         productRepository.save(product4);
+
+        Product product5 = new Product();
+        product5.setName("Angelissa Bathroom Vanity");
+        product5.setCategory("bathroom");
+        product5.setPrice(1480.0);
+        product5.setStock(100);
+        product5.setImageUrl("https://assets.wfcdn.com/im/18832593/resize-h400-w400%5Ecompr-r85/2221/222161398/default_name.jpg");
+        productRepository.save(product5);
+
+        Product product6 = new Product();
+        product6.setName("Braya Hydraulic Lift Up Storage Platform Bed");
+        product6.setCategory("bed");
+        product6.setPrice(3488.4);
+        product6.setStock(20);
+        product6.setImageUrl("https://assets.wfcdn.com/im/79121098/resize-h500-w500%5Ecompr-r85/2368/236866675/Braya+Hydraulic+Lift+Up+Storage+Upholstered+Platform+Bed.jpg");
+        productRepository.save(product6);
+
+        Product product7 = new Product();
+        product7.setName("Alamar Tufted Storage Platform Bed");
+        product7.setCategory("bed");
+        product7.setPrice(2488.4);
+        product7.setStock(60);
+        product7.setImageUrl("https://assets.wfcdn.com/im/18342698/resize-h500-w500%5Ecompr-r85/7256/72561549/Alamar+Tufted+Upholstered+Storage+Platform+Bed.jpg");
+        productRepository.save(product7);
+
+        Product product8 = new Product();
+        product8.setName("Rizzy Home Fringed Throw Pillow");
+        product8.setCategory("pillow");
+        product8.setPrice(48.9);
+        product8.setStock(60);
+        product8.setImageUrl("https://assets.wfcdn.com/im/88722670/resize-h755-w755%5Ecompr-r85/2321/232179326/Fringed+Throw+Pillow.jpg");
+        productRepository.save(product8);
 
         Cart cart1 = new Cart();
         cart1.setUser(user1);
