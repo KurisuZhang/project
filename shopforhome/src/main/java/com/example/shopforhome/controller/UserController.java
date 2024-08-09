@@ -55,10 +55,4 @@ public class UserController {
         return hashMap;
     }
 
-    // post logout
-    @DeleteMapping("/logout")
-    public String logout() {
-        return "logout success";
-    }
-
 }

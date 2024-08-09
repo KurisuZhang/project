@@ -44,24 +44,53 @@
             <button class="nav-link" id="stock-tab" data-bs-toggle="tab" data-bs-target="#stock" type="button" role="tab" aria-controls="stock" aria-selected="false">Stock</button>
         </li>
     </ul>
-    <div class="tab-content mt-4" id="adminTabContent">
-        <!-- User Tab -->
-        <div class="tab-pane fade show active" id="user" role="tabpanel" aria-labelledby="user-tab">
-            <h3>User Management</h3>
-            <form id="userForm">
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" placeholder="Enter username">
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter email">
-                </div>
-                <button type="submit" class="btn btn-primary">Create User</button>
-                <button type="button" class="btn btn-secondary">Update User</button>
-                <button type="button" class="btn btn-danger">Delete User</button>
-            </form>
-        </div>
+    <div class="tab-pane fade show active" id="user" role="tabpanel" aria-labelledby="user-tab">
+        <h3>User Management</h3>
+        <form id="userForm">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" placeholder="Enter username">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Enter password">
+            </div>
+            <button type="button" class="btn btn-primary" onclick="createUser()">Create User</button>
+            <button type="button" class="btn btn-secondary" onclick="updateUser()">Update User</button>
+            <button type="button" class="btn btn-danger" onclick="deleteUser()">Delete User</button>
+        </form>
+    </div>
+
+    <script>
+        function createUser() {
+            const url = `http://localhost:8080/api/admin/create/user/`+document.getElementById("username").value + '/' + document.getElementById("password").value;
+
+            fetch(url)
+                .then(response => response.text())
+                .then(data => alert(data))
+                .catch(error => alert('Error: ' + error));
+        }
+
+        function updateUser() {
+
+            const url = '/api/admin/update/user/' + document.getElementById("username").value + '/' + document.getElementById("password").value;
+
+            fetch(url)
+                .then(response => response.text())
+                .then(data => alert(data))
+                .catch(error => alert('Error: ' + error));
+        }
+
+        function deleteUser() {
+
+            const url = '/api/admin/delete/user/'+ document.getElementById("username").value;
+
+            fetch(url)
+                .then(response => response.text())
+                .then(data => alert(data))
+                .catch(error => alert('Error: ' + error));
+        }
+    </script>
 
         <!-- Product Tab -->
         <div class="tab-pane fade" id="product" role="tabpanel" aria-labelledby="product-tab">
@@ -97,7 +126,6 @@
             <%@ include file="../admin/stocks.jsp" %>
         </div>
     </div>
-</div>
 
 <%@ include file="../component/footer.jsp" %>
 
