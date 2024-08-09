@@ -1,15 +1,43 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.shopforhome.entity.Product" %>
 <div class="container my-4">
-    <h2 class="mb-4">Product List</h2>
+    
     <div class="row">
         <%
             List<Product> products = (List<Product>) request.getAttribute("products");
+        
+            //Conditionally display search results
+        
+            String searchQuery = (String) request.getAttribute("query");
 
+            Integer attribute =  (Integer)request.getAttribute("numberOfResults");
+            int numberOfResults = 0;
+            if(attribute!=null){
+                numberOfResults = attribute;
+            }
+            //Display the number of results matches the query
+            if (searchQuery != null && !searchQuery.trim().isEmpty()) {
+        %>
+            <p>Search results for "<%= searchQuery %>", <%= numberOfResults %> result(s) found</p>
+        
+            
+        <%}else if(request.getAttribute("selectedCategory")!=null){
+            //Display the selected Category Message
+            String selectedCategory = (String)request.getAttribute("selectedCategory");
+        %>
+            <h3> <%= selectedCategory %> </h3>
+        <%
+            }else{
+         %>
+            <h5 class="mb-4">Discover Our Latest Home Decor</h5>  
+        <%
+            }
+        %>
+        <%
             if (products != null && !products.isEmpty()) {
                 for (Product product : products) {
         %>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-2">
             <div class="product-card card">
                 <img src="<%= product.getImageUrl() %>" class="card-img-top" alt="<%= product.getName() %>">
                 <div class="product-card-body card-body">
@@ -32,5 +60,6 @@
         <%
             }
         %>
+
     </div>
 </div>

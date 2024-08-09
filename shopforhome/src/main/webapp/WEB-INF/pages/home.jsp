@@ -9,7 +9,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!--Google Font: Poppins-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
     <style>
+        html,body {
+            font-family: 'Poppins', sans-serif;
+        }
         .fancy-brand {
             font-family: 'Brush Script MT', cursive;
             font-size: 2rem;
@@ -17,6 +22,9 @@
             background: linear-gradient(to right, #ff7e5f, #feb47b);
             -webkit-background-clip: text;
             color: transparent;
+        }
+        .navbar-custom{
+            height:30px;
         }
         .product-card {
             border: 1px solid #e0e0e0;
@@ -36,11 +44,11 @@
             border-top-left-radius: 8px;
             border-top-right-radius: 8px;
             object-fit: cover;
-            height: 200px; /* Adjust height as needed */
+            height: 200px; 
         }
         .product-card-body {
             padding: 1.25rem;
-            flex: 1;
+            flex: 0;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
