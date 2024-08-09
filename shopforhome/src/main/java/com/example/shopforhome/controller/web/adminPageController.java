@@ -46,7 +46,7 @@ public class adminPageController {
 
         if (startDate != null && endDate != null) {
             try {
-                String url = "http://localhost:8082/api/reports?startDate=" + startDate + "&endDate=" + endDate;
+                String url = "http://reports/api/reports?startDate=" + startDate + "&endDate=" + endDate;
 
                 ResponseEntity<List<ReportDTO>> response = restTemplate.exchange(
                         url,
