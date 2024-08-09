@@ -3,6 +3,7 @@ package com.example.shopforhome.controller.web;
 import com.example.shopforhome.dto.ReportDTO;
 import com.example.shopforhome.entity.Product;
 import com.example.shopforhome.service.ProductService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -25,10 +26,13 @@ public class adminPageController {
     @Autowired
     private RestTemplate restTemplate;
 
-    @GetMapping("/admin/upload")
-    public String uploadPage() {
-        return "admin/upload";
+    @GetMapping("/admin")
+    public String adminPage(HttpSession session) {
+        List<Product> products = productService.getAllProducts();
+        session.setAttribute("products", products);
+        return "pages/admin";
     }
+
 
     @GetMapping("/admin/stocks")
     public String viewStocks(Model model) {
@@ -42,7 +46,7 @@ public class adminPageController {
             @RequestParam(name = "startDate", required = false) String startDate,
             @RequestParam(name = "endDate", required = false) String endDate
     ) {
-        ModelAndView modelAndView = new ModelAndView("admin/salesReports");
+        ModelAndView modelAndView = new ModelAndView("pages/admin");
 
         if (startDate != null && endDate != null) {
             try {

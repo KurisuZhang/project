@@ -49,4 +49,10 @@ public class authPageController {
         return "./auth/register";
     }
 
+    @GetMapping("/logout")
+    public ModelAndView logout(HttpSession session) {
+        session.invalidate();
+        return new ModelAndView("redirect:/login");
+    }
+
 }
