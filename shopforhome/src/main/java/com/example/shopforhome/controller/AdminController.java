@@ -1,5 +1,6 @@
 package com.example.shopforhome.controller;
 
+import com.example.shopforhome.dto.ProductPutByIdDTO;
 import com.example.shopforhome.entity.User;
 import com.example.shopforhome.service.ProductService;
 import com.example.shopforhome.service.UserService;
@@ -13,7 +14,6 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -27,16 +27,37 @@ public class AdminController {
 
     @PostMapping("/upload")
     public Map<String, String> handleFileUpload(@RequestParam("file") MultipartFile file) {
+        Map<String, String> response = new HashMap<>();
 
-        Map<String, String> hashMap = new HashMap();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
-            String fileContent = reader.lines().collect(Collectors.joining("\n"));
-            hashMap.put("data",fileContent);
+            // Skip the header line
+            String line = reader.readLine();
+
+            while ((line = reader.readLine()) != null) {
+                String[] fields = line.split(",");
+
+                if (fields.length == 5) {
+                    ProductPutByIdDTO product = new ProductPutByIdDTO();
+                    product.setName(fields[0]);
+                    product.setCategory(fields[1]);
+                    product.setPrice(Double.parseDouble(fields[2]));
+                    product.setStock(Integer.parseInt(fields[3]));
+                    product.setImageUrl(fields[4]);
+                    productService.addProduct(product);
+                }
+            }
+
+            response.put("status", "success");
+            response.put("message", "File uploaded and processed successfully.");
         } catch (IOException e) {
-            hashMap.put("data","failed");
-            return hashMap;
+            response.put("status", "error");
+            response.put("message", "File upload failed: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            response.put("status", "error");
+            response.put("message", "Failed to parse numerical values: " + e.getMessage());
         }
-        return hashMap;
+
+        return response;
     }
 
     @GetMapping("/create/user/{username}/{password}")

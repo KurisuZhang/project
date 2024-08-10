@@ -1,7 +1,6 @@
 <div class="container mt-4 content">
          <%@ page import="java.util.List" %>
          <%@ page import="com.example.shopforhome.dto.ReportDTO" %>
-        <h2>Sales Reports</h2>
         <form action="/admin/salesReports" method="GET">
             <div class="row mb-1">
             <div class="form-group col-2">
