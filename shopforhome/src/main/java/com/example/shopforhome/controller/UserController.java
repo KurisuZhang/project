@@ -28,7 +28,8 @@ public class UserController {
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             if (loginRequestDTO.getPassword().equals(user.getPassword())) {
-                return ResponseEntity.ok(user.getUsername()+"`"+user.getRole());
+                // username + role + id
+                return ResponseEntity.ok(user.getUsername()+"`"+user.getRole()+"`"+user.getId());
             } else {
                 return ResponseEntity.status(401).body("Statue\", \"Password is Wrong\""); // Unauthorized
             }

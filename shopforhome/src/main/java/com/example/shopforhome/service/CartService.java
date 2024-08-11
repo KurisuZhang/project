@@ -1,5 +1,6 @@
 package com.example.shopforhome.service;
 
+import com.example.shopforhome.dto.CartItemDTO;
 import com.example.shopforhome.entity.Cart;
 import com.example.shopforhome.entity.CartItem;
 import com.example.shopforhome.entity.User;
@@ -23,6 +24,11 @@ public class CartService {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Get cart by user id
+     * @param userId
+     * @return
+     */
     public Cart getCartByUserId(Long userId) {
         return cartRepository.findByUserId(userId)
                 .orElseGet(() -> {
@@ -37,11 +43,17 @@ public class CartService {
                 });
     }
 
-    public Cart addItem(Long userId, CartItem cartItem) {
+    /**
+     * Add item to cart
+     * @param userId
+     * @param cartItem
+     * @return
+     */
+    public Cart addItem(Long userId, CartItemDTO cartItem) {
         Cart cart = getCartByUserId(userId);
 
         Optional<CartItem> existingCartItem = cart.getItems().stream()
-                .filter(item -> item.getProduct().getId().equals(cartItem.getProduct().getId()))
+                .filter(item -> item.getProduct().getId().equals(cartItem.getProductId()))
                 .findFirst();
 
         if (existingCartItem.isPresent()) {
@@ -49,9 +61,13 @@ public class CartService {
             item.setQuantity(item.getQuantity() + cartItem.getQuantity());
             item.setPrice(item.getProduct().getPrice() * item.getQuantity());
         } else {
-            cartItem.setCart(cart);
-            cartItem.setPrice(cartItem.getProduct().getPrice() * cartItem.getQuantity());
-            cart.getItems().add(cartItem);
+            CartItem item = new CartItem();
+            item.setProduct(productRepository.findById(cartItem.getProductId())
+                    .orElseThrow(() -> new RuntimeException("Product not found")));
+            item.setQuantity(cartItem.getQuantity());
+            item.setPrice(item.getProduct().getPrice() * item.getQuantity());
+            item.setCart(cart);
+            cart.getItems().add(item);
         }
 
         cart.setPrice(cart.getItems().stream()
@@ -61,6 +77,13 @@ public class CartService {
         return cartRepository.save(cart);
     }
 
+    /**
+     * Update quantity of item in cart
+     * @param userId
+     * @param productId
+     * @param quantity
+     * @return
+     */
     public Cart updateQuantity(Long userId, Long productId, int quantity) {
         Cart cart = getCartByUserId(userId);
 
@@ -82,10 +105,15 @@ public class CartService {
         return cartRepository.save(cart);
     }
 
+    /**
+     * Remove item from cart
+     * @param userId
+     * @param productId
+     * @return
+     */
     public Cart removeItem(Long userId, Long productId) {
         Cart cart = getCartByUserId(userId);
-
-        cart.getItems().removeIf(item -> item.getProduct().getId().equals(productId));
+        cart.getItems().removeIf(item -> item.getId().equals(productId));
 
         cart.setPrice(cart.getItems().stream()
                 .mapToDouble(CartItem::getPrice)

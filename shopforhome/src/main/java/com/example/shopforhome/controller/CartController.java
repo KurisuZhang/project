@@ -1,7 +1,7 @@
 package com.example.shopforhome.controller;
 
+import com.example.shopforhome.dto.CartItemDTO;
 import com.example.shopforhome.entity.Cart;
-import com.example.shopforhome.entity.CartItem;
 import com.example.shopforhome.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +23,8 @@ public class CartController {
         return ResponseEntity.ok(cart);
     }
 
-    @PutMapping("/{userId}")
-    public Map<String, String> addItem(@PathVariable Long userId, @RequestBody CartItem cartItem) {
+    @PostMapping("/{userId}")
+    public Map<String, String> addItem(@PathVariable Long userId, @RequestBody CartItemDTO cartItem) {
         Cart updatedCart = cartService.addItem(userId, cartItem);
         Map<String, String> response = new HashMap<>();
         response.put("status", "success");
@@ -33,7 +33,7 @@ public class CartController {
         return response;
     }
 
-    @PutMapping("/{userId}/quantity/{productId}")
+    @PostMapping("/{userId}/quantity/{productId}")
     public Map<String, String> updateQuantity(@PathVariable Long userId, @PathVariable Long productId, @RequestParam int quantity) {
         Cart updatedCart = cartService.updateQuantity(userId, productId, quantity);
         Map<String, String> response = new HashMap<>();
@@ -47,7 +47,7 @@ public class CartController {
         return response;
     }
 
-    @DeleteMapping("/{userId}/item/{productId}")
+    @PostMapping("/{userId}/item/{productId}")
     public Map<String, String> removeItem(@PathVariable Long userId, @PathVariable Long productId) {
         Cart updatedCart = cartService.removeItem(userId, productId);
         Map<String, String> response = new HashMap<>();

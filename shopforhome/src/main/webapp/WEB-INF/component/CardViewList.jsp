@@ -44,9 +44,14 @@
                     <h5 class="product-card-title card-title"><%= product.getName() %></h5>
                     <p class="product-card-text">Category: <%= product.getCategory() %></p>
                     <p class="product-card-price">$<%= product.getPrice() %></p>
+                    <%if (isLoggedIn) { %>
                     <div class="product-card-footer">
-                        <a href="#" class="btn btn-primary"><i class="fas fa-cart-plus"></i> Add to Cart</a>
+                        <a href="javascript:addToCart(<%=product.getId() %>)" class="btn btn-primary"><i class="fas fa-cart-plus"></i> Add to Cart</a>
                     </div>
+                    <div class="product-card-footer">
+                        <a href="javascript:addToWishList(<%=product.getId() %>)" class="btn btn-primary mt-2">Add to Wish List</a>
+                    </div>
+                    <%} %>
                 </div>
             </div>
         </div>
@@ -60,6 +65,41 @@
         <%
             }
         %>
-
+        <script>
+            function addToWishList(productId) {
+                <%if (isLoggedIn) {%>
+                    const userid = 1;
+                    fetch(`/api/wishlist/add/<%=userId%>/`+productId, {
+                        method: 'POST'
+                    }).then(response => {
+                        window.location.href = `/wishlist/<%=userId%>`;
+                    });
+                <%} else {%>
+                    alert("Please login to add items to wish list.");
+                    window.location.href = "/login";
+                <%}%>
+            }
+            function addToCart(productId) {
+                <%if (isLoggedIn) {%>
+                    const userid = 1;
+                    fetch(`/api/cart/<%=userId%>`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            quantity: 1,
+                            userId: <%=userId %>,
+                            productId: productId
+                        })
+                    }).then(response => {
+                        window.location.href = `/cart/<%=userId%>`;
+                    });
+                <%} else {%>
+                    alert("Please login to add items to cart.");
+                    window.location.href = "/login";
+                <%}%>
+            }
+        </script>
     </div>
 </div>

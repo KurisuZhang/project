@@ -35,6 +35,7 @@ public class authPageController {
             String[] split = Objects.requireNonNull(login.getBody()).split("`");
             session.setAttribute("user",split[0]);
             session.setAttribute("role",split[1]);
+            session.setAttribute("userId",split[2]); // user id
             modelAndView.setViewName("redirect:/");
         }else {
             modelAndView.setViewName("/auth/login");
