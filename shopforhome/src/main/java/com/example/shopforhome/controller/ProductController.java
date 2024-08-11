@@ -4,8 +4,11 @@ import com.example.shopforhome.dto.ProductPutByIdDTO;
 import com.example.shopforhome.entity.Product;
 import com.example.shopforhome.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +20,9 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     @GetMapping("/all")
     public List<Product> getAllProducts() {
@@ -57,6 +63,17 @@ public class ProductController {
         response.put("status", "success");
         response.put("message", "Product added successfully");
         response.put("id", savedProduct.getId().toString());
+
+        // Get current date
+        LocalDate startDate = LocalDate.now();
+        // Construct report message
+        String reportMessage = "Product saved with name: " + savedProduct.getName();
+        // Construct URL for Report service
+        String url = "http://reports/api/reports?startDate=" + startDate + "&reportMessage=" + reportMessage;
+        // Send request to Report service
+        ResponseEntity<String> response1 = restTemplate.postForEntity(url, null, String.class);
+
+
         return response;
     }
 
