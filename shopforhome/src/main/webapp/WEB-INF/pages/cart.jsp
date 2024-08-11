@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.example.shopforhome.entity.Product" %>
+<%@ page import="com.example.shopforhome.entity.CartItem" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -153,32 +154,27 @@
         <div class="row">
             <div class="col-12">
                 <%
-                    List<Product> products = new ArrayList<>();
-                    products.add(new Product(1L, "ring", "jewelery", 10.99, 10, "https://via.placeholder.com/200", null, null));
-                    products.add(new Product(2L, "hard disk", "electronics", 64.00, 5, "https://via.placeholder.com/200", null, null));
-                    products.add(new Product(3L, "display", "electronics", 599.00, 8, "https://via.placeholder.com/200", null, null));
-                    products.add(new Product(4L, "Mens Casual", "men's clothing", 22.00, 3, "https://via.placeholder.com/200", null, null));
-
+                     List<CartItem> products = (List<CartItem>) request.getAttribute("products");
                     if (products != null && !products.isEmpty()) {
                         double totalPrice = 0;
-                        for (Product product : products) {
+                        for (CartItem product : products) {
                             int quantity = 1;
                             double price = product.getPrice() * quantity;
                             totalPrice += price;
                 %>
                 <div class="card product-card">
-                    <img src="<%= product.getImageUrl() %>" alt="Product Image">
+                    <img src="<%= product.getProduct().getImageUrl() %>" alt="Product Image">
                     <div class="product-card-body">
-                        <h5 class="product-card-title"><%= product.getName() %></h5>
-                        <p class="product-card-text"><%= product.getCategory() %></p>
+                        <h5 class="product-card-title"><%= product.getProduct().getName() %></h5>
+                        <p class="product-card-text"><%= product.getProduct().getCategory() %></p>
                         <div class="product-card-price">$<span class="price"><%= product.getPrice() %></span></div>
                         <div class="quantity-control">
                             <button class="btn btn-secondary btn-sm btn-minus"><i class="fas fa-minus"></i></button>
-                            <input type="number" class="quantity-input" value="<%= quantity %>" min="1">
+                            <input type="number" class="quantity-input" value="<%= product.getQuantity() %>" min="1">
                             <button class="btn btn-secondary btn-sm btn-plus"><i class="fas fa-plus"></i></button>
                         </div>
                         <div class="product-card-footer">
-                            <a href="#" class="btn btn-danger btn-remove"><i class="fas fa-trash-alt"></i> Remove</a>
+                            <a href="javascript:removeCartItem(<%=product.getId() %>)" class="btn btn-danger btn-remove"><i class="fas fa-trash-alt"></i> Remove</a>
                         </div>
                     </div>
                 </div>
@@ -202,7 +198,19 @@
             </div>
         </div>
     </div>
-
+    <script>
+    function removeCartItem(cartId) {
+        fetch(`/api/cart/<%=userId%>/item/`+cartId, {
+            method: 'POST'
+        })
+        .then(res => res.json())
+        .then(res => {
+            if (res.status === "success") {
+                location.reload();
+            }
+        });
+    }
+    </script>
 <%@ include file="../component/footer.jsp" %>
 
     <!-- Bootstrap JS and dependencies -->
@@ -251,22 +259,6 @@
                 });
 
                 quantityInput.setAttribute('data-old-value', quantityInput.value);
-            });
-
-            document.querySelectorAll('.btn-remove').forEach(function (removeButton) {
-                removeButton.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    const productCard = removeButton.closest('.product-card');
-                    const quantityInput = productCard.querySelector('.quantity-input');
-                    const quantity = parseInt(quantityInput.value);
-                    const priceDisplay = productCard.querySelector('.price');
-                    const unitPrice = parseFloat(priceDisplay.innerText);
-
-                    totalPrice -= unitPrice * quantity;
-                    document.getElementById("totalPrice").innerText = totalPrice.toFixed(2);
-
-                    productCard.remove();
-                });
             });
         });
     </script>

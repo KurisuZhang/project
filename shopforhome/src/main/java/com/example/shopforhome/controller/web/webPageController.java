@@ -1,18 +1,22 @@
 package com.example.shopforhome.controller.web;
 
 import com.example.shopforhome.controller.ProductController;
+import com.example.shopforhome.entity.Cart;
 import com.example.shopforhome.entity.Product;
+import com.example.shopforhome.entity.WishList;
+import com.example.shopforhome.service.CartService;
+import com.example.shopforhome.service.WishListService;
 import jakarta.servlet.http.HttpSession;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Enumeration;
 import java.util.List;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 
 
@@ -21,6 +25,12 @@ public class webPageController {
 
     @Autowired
     private ProductController productController;
+
+    @Autowired
+    private CartService cartService;
+
+    @Autowired
+    private WishListService wishListService;
 
     @GetMapping("/")
     public String home(Model model, HttpSession session) {
@@ -38,10 +48,10 @@ public class webPageController {
         return "/pages/home";
     }
 
-    @GetMapping("/cart")
-    public String cart(Model model) {
-        List<Product> products = productController.getAllProducts();
-        model.addAttribute("products", products);
+    @GetMapping("/cart/{userId}")
+    public String cart(@PathVariable Long userId, Model model) {
+        Cart cart = cartService.getCartByUserId(userId);
+        model.addAttribute("products", cart.getItems());
         return "./pages/cart";
     }
 
@@ -75,6 +85,13 @@ public class webPageController {
         return modelAndView;
     }
 
+    // Get wishlist
+    @GetMapping("/wishlist/{userId}")
+    public String getWishlist(@PathVariable Long userId, Model model) {
+        WishList wishList = wishListService.getAllItems(userId);
+        model.addAttribute("products", wishList.getItems());
+        return "./pages/wishlist";
+    }
 }
 
     
