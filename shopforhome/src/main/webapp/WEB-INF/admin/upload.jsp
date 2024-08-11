@@ -76,7 +76,7 @@
     <button class="btn btn-primary upload-btn mt-3" id="upload-button">
         <i class="fas fa-upload"></i> Upload
     </button>
-    <div id="outputContent" class="output-content"></div>
+    <div id="outputContent" class="file-name"></div>
 </div>
 
 <!-- JavaScript to handle file upload -->
@@ -99,14 +99,14 @@
             method: 'POST',
             body: formData
         })
-            .then(response => response.json())
-            .then(data => {
-                alert("File uploaded successfully!");
-                document.getElementById('outputContent').textContent = data;
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert("File upload failed!");
-            });
+        .then(response => response.json()) // Use .text() instead of .json()
+        .then(data => {
+            alert("File uploaded successfully!");
+            document.getElementById('outputContent').textContent = data.message;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("File upload failed!");
+        });
     });
 </script>

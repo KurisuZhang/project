@@ -1,7 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.shopforhome.entity.Product" %>
  <div class="container mt-4 content">
-    <h2>Products Stock </h2>
     <table class="table table-bordered">
         <thead>
             <tr>

@@ -44,69 +44,56 @@
             <button class="nav-link" id="stock-tab" data-bs-toggle="tab" data-bs-target="#stock" type="button" role="tab" aria-controls="stock" aria-selected="false">Stock</button>
         </li>
     </ul>
-    <div class="tab-pane fade show active" id="user" role="tabpanel" aria-labelledby="user-tab">
-        <h3>User Management</h3>
-        <form id="userForm">
-            <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" placeholder="Enter username">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Enter password">
-            </div>
-            <button type="button" class="btn btn-primary" onclick="createUser()">Create User</button>
-            <button type="button" class="btn btn-secondary" onclick="updateUser()">Update User</button>
-            <button type="button" class="btn btn-danger" onclick="deleteUser()">Delete User</button>
-        </form>
-    </div>
-
-    <script>
-        function createUser() {
-            const url = `http://localhost:8080/api/admin/create/user/`+document.getElementById("username").value + '/' + document.getElementById("password").value;
-
-            fetch(url)
-                .then(response => response.text())
-                .then(data => alert(data))
-                .catch(error => alert('Error: ' + error));
-        }
-
-        function updateUser() {
-
-            const url = '/api/admin/update/user/' + document.getElementById("username").value + '/' + document.getElementById("password").value;
-
-            fetch(url)
-                .then(response => response.text())
-                .then(data => alert(data))
-                .catch(error => alert('Error: ' + error));
-        }
-
-        function deleteUser() {
-
-            const url = '/api/admin/delete/user/'+ document.getElementById("username").value;
-
-            fetch(url)
-                .then(response => response.text())
-                .then(data => alert(data))
-                .catch(error => alert('Error: ' + error));
-        }
-    </script>
+    <div class="tab-content mt-3">
+        <!-- User Tab -->
+        <div class="tab-pane fade show active" id="user" role="tabpanel" aria-labelledby="user-tab">
+            <h3>User Management</h3>
+            <form id="userForm">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" placeholder="Enter username">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Enter password">
+                </div>
+                <button type="button" class="btn btn-primary" onclick="createUser()">Create User</button>
+                <button type="button" class="btn btn-secondary" onclick="updateUser()">Update User</button>
+                <button type="button" class="btn btn-danger" onclick="deleteUser()">Delete User</button>
+            </form>
+        </div>
 
         <!-- Product Tab -->
         <div class="tab-pane fade" id="product" role="tabpanel" aria-labelledby="product-tab">
             <h3>Product Management</h3>
             <form id="productForm">
                 <div class="mb-3">
+                    <label for="productId" class="form-label">Product ID</label>
+                    <input type="number" class="form-control" id="productId" placeholder="Enter productId">
+                </div>
+                <div class="mb-3">
                     <label for="productName" class="form-label">Product Name</label>
                     <input type="text" class="form-control" id="productName" placeholder="Enter product name">
                 </div>
                 <div class="mb-3">
-                    <label for="price" class="form-label">Price</label>
-                    <input type="number" class="form-control" id="price" placeholder="Enter price">
+                    <label for="productCategory" class="form-label">Product Category</label>
+                    <input type="text" class="form-control" id="productCategory" placeholder="Enter Category">
                 </div>
-                <button type="submit" class="btn btn-primary">Create Product</button>
-                <button type="button" class="btn btn-secondary">Update Product</button>
-                <button type="button" class="btn btn-danger">Delete Product</button>
+                <div class="mb-3">
+                    <label for="productPrice" class="form-label">Product Price</label>
+                    <input type="number" class="form-control" id="productPrice" placeholder="Enter price">
+                </div>
+                <div class="mb-3">
+                    <label for="productStock" class="form-label">Product Stock</label>
+                    <input type="number" class="form-control" id="productStock" placeholder="Enter Stock">
+                </div>
+                <div class="mb-3">
+                    <label for="productImageUrl" class="form-label">Product ImageUrl</label>
+                    <input type="text" class="form-control" id="productImageUrl" placeholder="Enter ImageUrl">
+                </div>
+                <button type="submit" class="btn btn-primary" onclick="addProduct()">Create Product</button>
+                <button type="button" class="btn btn-secondary" onclick="updateProduct()">Update Product</button>
+                <button type="button" class="btn btn-danger" onclick="deleteProduct()">Delete Product</button>
             </form>
         </div>
 
@@ -116,18 +103,132 @@
             <%@ include file="../admin/salesReports.jsp" %>
         </div>
 
+        <!-- Upload Tab -->
         <div class="tab-pane fade" id="upload" role="tabpanel" aria-labelledby="upload-tab">
             <h3>Upload</h3>
             <%@ include file="../admin/upload.jsp" %>
         </div>
 
+        <!-- Stock Tab -->
         <div class="tab-pane fade" id="stock" role="tabpanel" aria-labelledby="stock-tab">
             <h3>Stock</h3>
             <%@ include file="../admin/stocks.jsp" %>
         </div>
     </div>
+</div>
 
 <%@ include file="../component/footer.jsp" %>
+<script>
+    function createUser() {
+        const url = `http://localhost:8080/api/admin/create/user/`+document.getElementById("username").value + '/' + document.getElementById("password").value;
+
+        fetch(url)
+            .then(response => response.text())
+            .then(data => alert(data))
+            .catch(error => alert('Error: ' + error));
+    }
+
+    function updateUser() {
+
+        const url = '/api/admin/update/user/' + document.getElementById("username").value + '/' + document.getElementById("password").value;
+
+        fetch(url)
+            .then(response => response.text())
+            .then(data => alert(data))
+            .catch(error => alert('Error: ' + error));
+    }
+
+    function deleteUser() {
+
+        const url = '/api/admin/delete/user/'+ document.getElementById("username").value;
+
+        fetch(url)
+            .then(response => response.text())
+            .then(data => alert(data))
+            .catch(error => alert('Error: ' + error));
+    }
+    function addProduct() {
+        const productName = document.getElementById("productName").value;
+        const productCategory = document.getElementById("productCategory").value;
+        const productPrice = document.getElementById("productPrice").value;
+        const productStock = document.getElementById("productStock").value;
+        const productImageUrl = document.getElementById("productImageUrl").value;
+
+        const productData = {
+            name: productName,
+            category: productCategory,
+            price: productPrice,
+            stock: productStock,
+            imageUrl: productImageUrl
+        };
+
+        fetch('http://localhost:8080/api/product/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(productData)
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Product created successfully:', data);
+                alert("success");
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('Error')
+            });
+    }
+
+    function updateProduct() {
+        const productName = document.getElementById("productName").value;
+        const productCategory = document.getElementById("productCategory").value;
+        const productPrice = document.getElementById("productPrice").value;
+        const productStock = document.getElementById("productStock").value;
+        const productImageUrl = document.getElementById("productImageUrl").value;
+
+        const productData = {
+            name: productName,
+            category: productCategory,
+            price: productPrice,
+            stock: productStock,
+            imageUrl: productImageUrl
+        };
+
+        fetch('http://localhost:8080/api/product/' + document.getElementById("productId").value, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(productData)
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Product updated successfully:', data);
+                alert("success");
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('Error')
+            });
+    }
+
+    function deleteProduct() {
+
+        fetch('http://localhost:8080/api/product/' + document.getElementById("productId").value, {
+            method: 'DELETE'
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Product deleted successfully:', data);
+                alert("success");
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('Error')
+            });
+    }
+</script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
