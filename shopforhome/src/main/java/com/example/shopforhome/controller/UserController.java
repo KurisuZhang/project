@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -54,6 +55,11 @@ public class UserController {
         hashMap.put("userName",user.getUsername());
         hashMap.put("role", user.getRole());
         return hashMap;
+    }
+
+    @GetMapping("/roles")
+    public List<String> getDistinctRoles() {
+        return userService.getDistinctRoles();
     }
 
 }

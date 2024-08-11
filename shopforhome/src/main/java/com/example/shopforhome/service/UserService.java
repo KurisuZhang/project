@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,6 +30,10 @@ public class UserService {
 
     // Method to get the role of a user by username
     public Optional<String> findRoleByUsername(String username) {
-        return userRepository.findRoleByUsername(username);
+        Optional<User> userOptional = userRepository.findByUsername(username);
+        return userOptional.map(User::getRole);
+    }
+    public List<String> getDistinctRoles() {
+        return userRepository.findDistinctRoles();
     }
 }

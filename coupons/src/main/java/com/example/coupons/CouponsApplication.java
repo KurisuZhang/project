@@ -35,11 +35,10 @@ public class CouponsApplication implements CommandLineRunner {
 		couponRepository.save(coupon1);
 
 		Map<String, Double> discounts1 = new HashMap<>();
-		discounts.put("DISCOUNT50%", 0.5);
-		discounts.put("DISCOUNT90%", 0.1);
+		discounts1.put("DISCOUNT80%", 0.8);
+		discounts1.put("DISCOUNT90%", 0.1);
 
-		Coupon coupon2 = new Coupon(2L, discounts, "ROLE_ADMIN");
-
+		Coupon coupon2 = new Coupon(2L, discounts1, "ROLE_ADMIN");
 		couponRepository.save(coupon2);
 	}
 

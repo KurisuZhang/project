@@ -1,8 +1,8 @@
 package com.example.shopforhome.controller.web;
 
+import com.example.shopforhome.controller.ProductController;
 import com.example.shopforhome.dto.ReportDTO;
 import com.example.shopforhome.entity.Product;
-import com.example.shopforhome.service.ProductService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -21,22 +21,30 @@ import java.util.List;
 public class adminPageController {
 
     @Autowired
-    private ProductService productService;
+    private ProductController productController;
 
     @Autowired
     private RestTemplate restTemplate;
 
     @GetMapping("/admin")
-    public String adminPage(HttpSession session) {
-        List<Product> products = productService.getAllProducts();
-        session.setAttribute("products", products);
-        return "pages/admin";
+    public String adminPage(Model model, HttpSession session) {
+        Object role = session.getAttribute("role");
+        if (session.getAttribute("role") != null && session.getAttribute("role").equals("ROLE_ADMIN")) {
+            List<Product> products = productController.getAllProducts();
+            session.setAttribute("products", products);
+            return "pages/admin";
+        }else {
+            List<Product> products = productController.getAllProducts();
+            model.addAttribute("products", products);
+            return "pages/home";
+        }
+
     }
 
 
     @GetMapping("/admin/stocks")
     public String viewStocks(Model model) {
-        List<Product> products = productService.getAllProducts();
+        List<Product> products = productController.getAllProducts();
         model.addAttribute("products", products);
         return "admin/stocks";
     }

@@ -18,7 +18,9 @@ public class CouponService {
     public Optional<Double> getDiscountByCouponNameAndUserRole(String couponName, String userRole) {
         Optional<Coupon> coupon = couponRepository.findByUserRole(userRole);
         Optional<Double> v = coupon.map(c -> c.getDiscounts().get(couponName));
-        return v;
+        if (v.isPresent()){
+        }
+        return coupon.map(c -> c.getDiscounts().get(couponName));
     }
 
     public boolean updateCoupon(String userRole, String couponName, double couponValue) {

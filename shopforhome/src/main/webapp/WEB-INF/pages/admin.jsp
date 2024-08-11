@@ -43,6 +43,9 @@
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="stock-tab" data-bs-toggle="tab" data-bs-target="#stock" type="button" role="tab" aria-controls="stock" aria-selected="false">Stock</button>
         </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="coupon-tab" data-bs-toggle="tab" data-bs-target="#coupon" type="button" role="tab" aria-controls="coupon" aria-selected="false">Coupon</button>
+        </li>
     </ul>
     <div class="tab-content mt-3">
         <!-- User Tab -->
@@ -113,6 +116,10 @@
         <div class="tab-pane fade" id="stock" role="tabpanel" aria-labelledby="stock-tab">
             <h3>Stock</h3>
             <%@ include file="../admin/stocks.jsp" %>
+        </div>
+        <div class="tab-pane fade" id="coupon" role="tabpanel" aria-labelledby="coupon-tab">
+            <h3>Coupon</h3>
+            <%@ include file="../admin/conpon.jsp" %>
         </div>
     </div>
 </div>

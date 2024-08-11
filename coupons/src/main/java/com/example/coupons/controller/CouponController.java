@@ -16,8 +16,8 @@ public class CouponController {
     @Autowired
     private CouponService couponService;
 
-    @PostMapping("/discount")
-    public ResponseEntity<Double> getDiscount(@RequestParam String couponName, @RequestParam String userRole) {
+    @GetMapping("/discount/{couponName}/{userRole}")
+    public ResponseEntity<Double> getDiscount(@PathVariable String couponName, @PathVariable String userRole) {
         Optional<Double> discount = couponService.getDiscountByCouponNameAndUserRole(couponName, userRole);
         if (discount.isPresent()) {
             return ResponseEntity.ok(discount.get());

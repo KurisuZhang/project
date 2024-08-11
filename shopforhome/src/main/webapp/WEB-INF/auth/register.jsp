@@ -77,6 +77,29 @@
 
 
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Perform a GET request to fetch the list of roles
+        fetch('http://localhost:8080/api/user/roles')
+            .then(response => response.json())
+            .then(data => {
+                const userGroupSelect = document.getElementById('user-group');
+
+                // Clear existing options
+                userGroupSelect.innerHTML = '';
+
+                // Populate the dropdown with the roles received from the API
+                data.forEach(role => {
+                    const option = document.createElement('option');
+                    option.value = role;
+                    option.textContent = role.toUpperCase();
+                    userGroupSelect.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching roles:', error);
+            });
+    });
+
     document.getElementById('register-form').addEventListener('submit', function (event) {
         event.preventDefault();
 
