@@ -106,7 +106,7 @@
         const username = document.getElementById('reg-username').value;
         const password = document.getElementById('reg-password').value;
         const confirmPassword = document.getElementById('confirm-password').value;
-        const role = "ROLE_" + document.getElementById('user-group').value;
+        const role = document.getElementById('user-group').value;
 
         if (password !== confirmPassword) {
             alert('Passwords do not match!');

@@ -38,7 +38,6 @@ public class webPageController {
         Enumeration<String> attributeNames = session.getAttributeNames();
         while (attributeNames.hasMoreElements()) {
             String attributeName = attributeNames.nextElement();
-            System.out.println("Session Attribute - Name: " + attributeName + ", Value: " + session.getAttribute(attributeName));
         }
 
 
