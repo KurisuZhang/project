@@ -4,7 +4,6 @@ import com.example.shopforhome.dto.ProductPutByIdDTO;
 import com.example.shopforhome.entity.Product;
 import com.example.shopforhome.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -71,7 +70,7 @@ public class ProductController {
         // Construct URL for Report service
         String url = "http://reports/api/reports?startDate=" + startDate + "&reportMessage=" + reportMessage;
         // Send request to Report service
-        ResponseEntity<String> response1 = restTemplate.postForEntity(url, null, String.class);
+        restTemplate.postForEntity(url, null, String.class);
 
 
         return response;
@@ -90,6 +89,15 @@ public class ProductController {
             response.put("message", "Product with ID " + id + " not found.");
         }
 
+        // Get current date
+        LocalDate startDate = LocalDate.now();
+        // Construct report message
+        String reportMessage = "Product update with name: " + updatedProduct.get().getName();
+        // Construct URL for Report service
+        String url = "http://reports/api/reports?startDate=" + startDate + "&reportMessage=" + reportMessage;
+        // Send request to Report service
+        restTemplate.postForEntity(url, null, String.class);
+
         return response;
     }
 
@@ -107,6 +115,14 @@ public class ProductController {
             response.put("status", "failure");
             response.put("message", "Product with ID " + id + " not found.");
         }
+        // Get current date
+        LocalDate startDate = LocalDate.now();
+        // Construct report message
+        String reportMessage = "Product delete with id: " + id;;
+        // Construct URL for Report service
+        String url = "http://reports/api/reports?startDate=" + startDate + "&reportMessage=" + reportMessage;
+        // Send request to Report service
+        restTemplate.postForEntity(url, null, String.class);
         return response;
     }
 
