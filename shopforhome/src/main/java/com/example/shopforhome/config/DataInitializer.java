@@ -108,7 +108,7 @@ public class DataInitializer implements CommandLineRunner {
         product8.setName("Rizzy Home Fringed Throw Pillow");
         product8.setCategory("pillow");
         product8.setPrice(48.9);
-        product8.setStock(60);
+        product8.setStock(6);
         product8.setImageUrl("https://assets.wfcdn.com/im/88722670/resize-h755-w755%5Ecompr-r85/2321/232179326/Fringed+Throw+Pillow.jpg");
         productRepository.save(product8);
 

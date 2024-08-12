@@ -3,6 +3,7 @@ package com.example.shopforhome.controller.web;
 import com.example.shopforhome.controller.ProductController;
 import com.example.shopforhome.dto.ReportDTO;
 import com.example.shopforhome.entity.Product;
+import com.example.shopforhome.service.ProductService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -79,6 +80,17 @@ public class adminPageController {
         }
 
         return modelAndView;
+    }
+
+    @GetMapping("/admin/stocks/checkLowStock")
+    public String checkLowStock(Model model, HttpSession session) {
+        // Fetch products with stock less than 10
+        int num =10;
+        List<Product> lowStockProducts = productController.findProductsWithLowStock(num);
+
+        session.setAttribute("lowStockProducts", lowStockProducts);
+        return "admin/stocks";
+
     }
 
 }

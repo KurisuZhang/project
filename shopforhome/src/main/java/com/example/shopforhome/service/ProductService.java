@@ -4,11 +4,14 @@ import com.example.shopforhome.dto.ProductPutByIdDTO;
 import com.example.shopforhome.repository.ProductRepository;
 import com.example.shopforhome.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -68,5 +71,15 @@ public class ProductService {
         products.sort(ascending ? comparator : comparator.reversed());
         return products;
     }
+
+    public List<Product> findProductsWithLowStock(int num) {
+        List<Product> res =productRepository.findByStockLessThan(num);
+        System.out.println("Low stock products:");
+        for (Product product : res) {
+            System.out.println(product);
+        }
+        return res;
+    }
+
 }
 

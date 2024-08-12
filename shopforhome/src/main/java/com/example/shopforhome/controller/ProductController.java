@@ -4,6 +4,8 @@ import com.example.shopforhome.dto.ProductPutByIdDTO;
 import com.example.shopforhome.entity.Product;
 import com.example.shopforhome.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -136,4 +138,7 @@ public class ProductController {
         return productService.sortProductsByPrice(ascending);
     }
 
+    public List<Product> findProductsWithLowStock(int num) {
+        return productService.findProductsWithLowStock(num);
+    }
 }
