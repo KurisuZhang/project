@@ -179,11 +179,10 @@
             .then(response => response.json())
             .then(data => {
                 console.log('Product created successfully:', data);
-                alert("success");
+                window.location.reload();
             })
             .catch((error) => {
                 console.error('Error:', error);
-                alert('Error')
             });
     }
 
@@ -213,6 +212,7 @@
             .then(data => {
                 console.log('Product updated successfully:', data);
                 alert("success");
+                window.location.reload();
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -229,6 +229,7 @@
             .then(data => {
                 console.log('Product deleted successfully:', data);
                 alert("success");
+                window.location.reload();
             })
             .catch((error) => {
                 console.error('Error:', error);

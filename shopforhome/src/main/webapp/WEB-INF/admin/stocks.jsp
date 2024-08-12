@@ -37,6 +37,7 @@
 </div>
 
 <div class="container mt-4 content">
+    <h2>Low Stock</h2>
     <!-- Container for the low stock table -->
         <%
             List<Product> lowStockProducts = (List<Product>) session.getAttribute("lowStockProducts");
@@ -71,9 +72,10 @@
             </tbody>
         </table>
         <% } else{%>
+    <% } %>
          <!-- Button to check low stock -->
         <a href="/admin/stocks/checkLowStock" class="btn btn-warning">Check Low Stock</a>
-        <% } %>
+
 
  </div>
 

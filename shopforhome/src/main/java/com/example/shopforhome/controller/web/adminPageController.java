@@ -3,7 +3,6 @@ package com.example.shopforhome.controller.web;
 import com.example.shopforhome.controller.ProductController;
 import com.example.shopforhome.dto.ReportDTO;
 import com.example.shopforhome.entity.Product;
-import com.example.shopforhome.service.ProductService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -89,7 +88,7 @@ public class adminPageController {
         List<Product> lowStockProducts = productController.findProductsWithLowStock(num);
 
         session.setAttribute("lowStockProducts", lowStockProducts);
-        return "admin/stocks";
+        return "pages/admin";
 
     }
 
